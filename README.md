@@ -12,3 +12,32 @@ A RAG-powered Python Docs Assistant that acts as a smart guide to Python documen
 3. The LLM explains it in clear, contextual terms — with code examples where possible.
 
 4. Provides citations & links back to the official docs for verification. -->
+
+
+## How to Run
+
+1. Clone the repo
+```
+git clone https://github.com/Perseus1702/PyDocs-RAG.git
+
+```
+
+2. Create a venv and install the dependencies
+```
+python -m .venv
+.venv/Scripts/activate
+pip install -r requirements.txt
+```
+
+3. Run the scraper script to build the knowledge base
+```
+python scrape_build.py
+```
+4. Normalize and index the knowledge base
+```
+python index_kb.py
+```
+5. Ask away
+```
+python ask.py --q "How to use else statement"
+```
