@@ -1,0 +1,698 @@
+{
+  "meta": {
+    "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+    "title": "Automate the Boring Stuff 3e – Chapter 2"
+  },
+  "passages": [
+    {
+      "id": "if:001",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "2 \n IF-ELSE AND FLOW CONTROL"
+    },
+    {
+      "id": "if:002",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "So, you know the basics of individual instructions and that a program is just a series of such instructions. But programming’s real strength isn’t just running one instruction after another like a weekend errand list. Based on how expressions evaluate, a program can decide to skip instructions, repeat them, or choose one of several instructions to run. In fact, you almost never want your programs to start from the first line of code and simply execute every line, straight to the end. Flow control statements can decide which Python instructions to execute under which conditions."
+    },
+    {
+      "id": "if:003",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "can decide which Python instructions to execute under which conditions."
+    },
+    {
+      "id": "if:004",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "These flow control statements directly correspond to the symbols in a flowchart, so I’ll provide flowchart versions of the code discussed in this chapter. Figure 2-1 shows a flowchart for what to do if it’s raining. Follow the path made by the arrows from Start to End."
+    },
+    {
+      "id": "if:005",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Figure 2-1: A flowchart to tell you what to do if it is raining Description"
+    },
+    {
+      "id": "if:006",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "In a flowchart, there is usually more than one way to go from the start to the end. The same is true for lines of code in a computer program. Flowcharts represent these branching points with diamonds, the other steps with rectangles, and the starting and ending steps with rounded rectangles."
+    },
+    {
+      "id": "if:007",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "But before you learn about flow control statements, you first need to learn how to represent those yes and no options, and you need to understand how to write those branching points as Python code. To that end, let’s explore Boolean values, comparison operators, and Boolean operators."
+    },
+    {
+      "id": "if:008",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Boolean Values"
+    },
+    {
+      "id": "if:009",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "While the integer, floating-point, and string data types have an unlimited number of possible values, the Boolean data type has only two values: True and False . ( Boolean is capitalized because the data type is named after mathematician George Boole.) When entered as Python code, the Boolean values True and False lack the quotation marks you place around strings, and they always start with a capital T or F , with the rest of the word in lowercase. Note that these Boolean values don’t have quotes, because they are different from the string values 'True' and 'False' . Enter the following into the interactive shell:"
+    },
+    {
+      "id": "if:010",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "have quotes, because they are different from the string values 'True' and 'False' . Enter the following into the interactive shell:"
+    },
+    {
+      "id": "if:011",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "❶\n >>> \nspam = True\n\n>>> \nspam\n\nTrue\n\n❷\n >>> \ntrue\n\nTraceback (most recent call last):\n  File \"<python-input-0>\", line 1, in <module>\nNameError: name 'true' is not defined\n\n❸\n >>> \nFalse = 2 + 2\n\n  File \"<python-input-0>\", line 1, in <module>\nSyntaxError: can't assign to False"
+    },
+    {
+      "id": "if:012",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Some of these instructions are intentionally incorrect, and they’ll cause error messages to appear. Like any other value, you can use Boolean values in expressions and store them in variables ❶ . If you don’t use the proper case ❷ or if you try to use True and False for variable names ❸ , Python will give you an error message."
+    },
+    {
+      "id": "if:013",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Comparison Operators"
+    },
+    {
+      "id": "if:014",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Comparison operators , also called relational operators , compare two values and evaluate down to a single Boolean value. Table 2-1 lists the comparison operators."
+    },
+    {
+      "id": "if:015",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Operator | Meaning | Examples\n-----------------------------\n== | Equal to | 5 == 5 evaluates to True . 4 == 2 + 2 evaluates to True .\n!= | Not equal to | 1 != 2 evaluates to True . 'Hello' != 'Hello' evaluates to False .\n< | Less than | 10 < 5 evaluates to False . 1.999 < 5 evaluates to True .\n> | Greater than | 1 + 1 > 4 + 8 evaluates to False . 99 > 4 + 8 evaluates to True .\n<= | Less than or equal to | 4 <= 5 evaluates to True . 5 <= 5 evaluates to True .\n>= | Greater than or equal to | 5 >= 4 evaluates to True . 5 >= 5 evaluates to True ."
+    },
+    {
+      "id": "if:016",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "5 == 5 evaluates to True . 4 == 2 + 2 evaluates to True ."
+    },
+    {
+      "id": "if:017",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "1 + 1 > 4 + 8 evaluates to False . 99 > 4 + 8 evaluates to True ."
+    },
+    {
+      "id": "if:018",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "These operators evaluate to True or False depending on the values you give them. Let’s try some operators now, starting with == and != :"
+    },
+    {
+      "id": "if:019",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": ">>> \n42 == 42\n\nTrue\n>>> \n42 == 99\n\nFalse\n\n>>> \n2 != 3\n\nTrue\n>>> \n2 != 2\n\nFalse"
+    },
+    {
+      "id": "if:020",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "As you might expect, == (equal to) evaluates to True when the values on both sides are the same, and != (not equal to) evaluates to True when the two values are different. The == and != operators can actually work with values of any data type:"
+    },
+    {
+      "id": "if:021",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": ">>> \n'hello' == 'hello'\n\nTrue\n>>> \n'hello' == 'Hello'\n\nFalse\n>>> \n'dog' != 'cat'\n\nTrue\n>>> \nTrue == True\n\nTrue\n>>> \nTrue != False\n\nTrue\n>>> \n42 == 42.0\n\nTrue\n\n❶\n >>> \n42 == '42'\n\nFalse"
+    },
+    {
+      "id": "if:022",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Note that an integer or floating-point value will never equal a string value. The expression 42 == '42' ❶ evaluates to False because Python considers the integer 42 to be different from the string '42' . However, Python does consider the integer 42 to be the same as the float 42.0 ."
+    },
+    {
+      "id": "if:023",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "The < , > , <= , and >= operators, on the other hand, work properly only with integer and floating-point values:"
+    },
+    {
+      "id": "if:024",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": ">>> \n42 < 100\n\nTrue\n>>> \n42 > 100\n\nFalse\n>>> \n42 < 42\n\nFalse\n>>> \neggs = 42\n\n\n❶\n >>> \neggs <= 42\n\nTrue\n>>> \nmy_age = 29\n\n\n❷\n >>> \nmy_age >= 10\n\nTrue"
+    },
+    {
+      "id": "if:025",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "You’ll often use comparison operators to compare a variable’s value to some other value, like in the eggs <= 42 ❶ and my_age >= 10 ❷ examples, or to compare the values in two variables to each other. (After all, comparing two literal values like 'dog' != 'cat' always has the same result.) You’ll see more examples of this later when you learn about flow control statements."
+    },
+    {
+      "id": "if:026",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "You might have noticed that the == operator (equal to) has two equal signs, while the = operator (assignment) has just one equal sign. It’s easy to confuse these two operators with each other. Just remember these points:"
+    },
+    {
+      "id": "if:027",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "The == operator asks whether two values are the same as each other."
+    },
+    {
+      "id": "if:028",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "The = operator puts the value on the right into the variable on the left."
+    },
+    {
+      "id": "if:029",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "To help remember which is which, notice that the == operator (equal to) consists of two characters, just like the != operator (not equal to) consists of two characters."
+    },
+    {
+      "id": "if:030",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Boolean Operators"
+    },
+    {
+      "id": "if:031",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "The three Boolean operators ( and , or , and not ) are used to compare Boolean values. Like comparison operators, they evaluate these expressions down to a Boolean value. Let’s explore these operators in detail, starting with the and operator."
+    },
+    {
+      "id": "if:032",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "The and operator always takes two Boolean values (or expressions), so it’s considered to be a binary Boolean operator. The and operator evaluates an expression to True if both Boolean values are True ; otherwise, it evaluates to False . Enter some expressions using and into the interactive shell to see it in action:"
+    },
+    {
+      "id": "if:033",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": ">>> \nTrue and True\n\nTrue\n>>> \nTrue and False\n\nFalse"
+    },
+    {
+      "id": "if:034",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "A truth table shows every possible result of a Boolean operator. Table 2-2 is the truth table for the and operator."
+    },
+    {
+      "id": "if:035",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Expression | Evaluates to ...\n-----------------------------\nTrue and True | True\nTrue and False | False\nFalse and True | False\nFalse and False | False"
+    },
+    {
+      "id": "if:036",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Like the and operator, the or operator also always takes two Boolean values (or expressions), and therefore is considered to be a binary Boolean operator. However, the or operator evaluates an expression to True if either of the two Boolean values is True . If both are False , it evaluates to False :"
+    },
+    {
+      "id": "if:037",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": ">>> \nFalse or True\n\nTrue\n>>> \nFalse or False\n\nFalse"
+    },
+    {
+      "id": "if:038",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "You can see every possible outcome of the or operator in its truth table, shown in Table 2-3."
+    },
+    {
+      "id": "if:039",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Expression | Evaluates to ...\n-----------------------------\nTrue or True | True\nTrue or False | True\nFalse or True | True\nFalse or False | False"
+    },
+    {
+      "id": "if:040",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Unlike and and or , the not operator operates on only one Boolean value (or expression). This makes it a unary operator. The not operator simply evaluates to the opposite Boolean value:"
+    },
+    {
+      "id": "if:041",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": ">>> \nnot True\n\nFalse\n\n❶\n >>> \nnot not not not True\n\nTrue"
+    },
+    {
+      "id": "if:042",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Much like using double negatives in speech and writing, you can use multiple not operators ❶ , though there’s never not no reason to do this in real programs. Table 2-4 shows the truth table for not ."
+    },
+    {
+      "id": "if:043",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Expression | Evaluates to ...\n-----------------------------\nnot True | False\nnot False | True"
+    },
+    {
+      "id": "if:044",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Mixing Boolean and Comparison Operators"
+    },
+    {
+      "id": "if:045",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Since the comparison operators evaluate to Boolean values, you can use them in expressions with the Boolean operators."
+    },
+    {
+      "id": "if:046",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Recall that the and , or , and not operators are called Boolean operators because they always operate on the Boolean values True and False . While expressions like 4 < 5 aren’t Boolean values, they are expressions that evaluate down to Boolean values. Try entering some Boolean expressions that use comparison operators into the interactive shell:"
+    },
+    {
+      "id": "if:047",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": ">>> \n(4 < 5) and (5 < 6)\n\nTrue\n>>> \n(4 < 5) and (9 < 6)\n\nFalse\n>>> \n(1 == 2) or (2 == 2)\n\nTrue"
+    },
+    {
+      "id": "if:048",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "The computer will evaluate the left expression first, and then it will evaluate the right expression. When it knows the Boolean value for each, it will evaluate the whole expression down to one Boolean value. You can think of the computer’s evaluation process for (4 < 5) and (5 < 6) as the following:"
+    },
+    {
+      "id": "if:049",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "You can also use multiple Boolean operators in an expression, along with the comparison operators:"
+    },
+    {
+      "id": "if:050",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": ">>> \nspam = 4\n\n>>> \n2 + 2 == spam and not 2 + 2 == (spam + 1) and 2 * 2 == 2 + 2\n\nTrue"
+    },
+    {
+      "id": "if:051",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "The Boolean operators have an order of operations just like the math operators do. After any math and comparison operators evaluate, Python evaluates the not operators first, then the and operators, and then the or operators."
+    },
+    {
+      "id": "if:052",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Components of Flow Control"
+    },
+    {
+      "id": "if:053",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Flow control statements often start with a part called the condition and are always followed by a block of code called the clause . Before you learn about Python’s specific flow control statements, I’ll cover what a condition and a block are."
+    },
+    {
+      "id": "if:054",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Conditions"
+    },
+    {
+      "id": "if:055",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "The Boolean expressions you’ve seen so far could all be considered conditions, which are the same thing as expressions; condition is just a more specific name in the context of flow control statements. A condition always evaluates to a Boolean value, True or False . A flow control statement decides what to do based on whether its condition is True or False , and almost every flow control statement uses a condition. You’ll frequently write code that could be described in English as follows: “If this condition is true, do this thing, or else do this other thing.” Other code you’ll write is the same as saying, “Keep repeating these"
+    },
+    {
+      "id": "if:056",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "this condition is true, do this thing, or else do this other thing.” Other code you’ll write is the same as saying, “Keep repeating these instructions as long as this condition continues to be true.”"
+    },
+    {
+      "id": "if:057",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Blocks of Code"
+    },
+    {
+      "id": "if:058",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Lines of Python code can be grouped together in blocks . You can tell when a block begins and ends from the indentation of the lines of code. There are four rules for blocks:"
+    },
+    {
+      "id": "if:059",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "A new block begins when the indentation increases."
+    },
+    {
+      "id": "if:060",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "A block ends when the indentation decreases to zero or to a containing block’s indentation."
+    },
+    {
+      "id": "if:061",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Python expects a new block immediately after any statement that ends with a colon."
+    },
+    {
+      "id": "if:062",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Blocks are easier to understand by looking at some indented code, so let’s find the blocks in part of a small program, shown here:"
+    },
+    {
+      "id": "if:063",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "username = 'Mary'\npassword = 'swordfish'\nif username == 'Mary':\n  \n❶\n print('Hello, Mary')\n    if password == 'swordfish':\n      \n❷\n print('Access granted.')\n    else:\n      \n❸\n print('Wrong password.')"
+    },
+    {
+      "id": "if:064",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "The first block of code ❶ starts at the line print('Hello, Mary') and contains all the lines after it. Inside this block is another block ❷ , which has only a single line in it: print('Access granted.') . The third block ❸ is also one line long: print('Wrong password.') ."
+    },
+    {
+      "id": "if:065",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Program Execution"
+    },
+    {
+      "id": "if:066",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "In the previous chapter’s hello.py program, Python started executing instructions at the top of the program going down, one after another. Program execution (or simply, execution ) is a term for the current instruction being executed. If you put your finger on each line on your screen as the line is executed, you can think of your finger as the program execution."
+    },
+    {
+      "id": "if:067",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Not all programs execute by simply going straight down, however. If you use your finger to trace through a program with flow control statements, you’ll likely find your finger jumping around to different places in the source code based on conditions."
+    },
+    {
+      "id": "if:068",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Flow Control Statements"
+    },
+    {
+      "id": "if:069",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Now let’s explore the most important piece of flow control: the statements themselves. The statements represent the diamonds you saw in the flowchart in Figure 2-1, and they are the actual decisions your programs will make."
+    },
+    {
+      "id": "if:070",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "if"
+    },
+    {
+      "id": "if:071",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "The most common type of flow control statement is the if statement. An if statement’s clause (that is, the block following the if statement) will execute if the statement’s condition is True . The clause is skipped if the condition is False ."
+    },
+    {
+      "id": "if:072",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "In plain English, an if statement could be read as, “If this condition is true, execute the code in the clause.” In Python, an if statement consists of the following:"
+    },
+    {
+      "id": "if:073",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "A condition (that is, an expression that evaluates to True or False )"
+    },
+    {
+      "id": "if:074",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Starting on the next line, an indented block of code (called the if clause or if block)"
+    },
+    {
+      "id": "if:075",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "For example, let’s say you have some code that checks whether someone’s name is Alice:"
+    },
+    {
+      "id": "if:076",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "name = 'Alice'\nif name == 'Alice':\n    print('Hi, Alice.')"
+    },
+    {
+      "id": "if:077",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "All flow control statements end with a colon and are followed by a new block of code (the clause). This if statement’s clause is the block with print('Hi, Alice.') . Figure 2-2 shows what the flowchart of this code would look like."
+    },
+    {
+      "id": "if:078",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Try changing the name variable to another string besides 'Alice' , and run the program again. Notice that “Hi, Alice.” doesn’t appear on the screen, because that code was skipped over."
+    },
+    {
+      "id": "if:079",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "else"
+    },
+    {
+      "id": "if:080",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "An if clause can optionally be followed by an else statement. The else clause is executed only when the if statement’s condition is False . In plain English, an else statement could be read as, “If this condition is true, execute this code. Or else, execute that code.” An else statement doesn’t have a condition, and in code, an else statement always consists of the following:"
+    },
+    {
+      "id": "if:081",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Starting on the next line, an indented block of code (called the else clause or else block)"
+    },
+    {
+      "id": "if:082",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Returning to the Alice example, let’s look at some code that uses an else statement to offer a different greeting if the person’s name isn’t Alice:"
+    },
+    {
+      "id": "if:083",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "name = 'Alice'\nif name == 'Alice':\n\n    print('Hi, Alice.')\nelse:\n    print('Hello, stranger.')"
+    },
+    {
+      "id": "if:084",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Try changing the name variable to a string besides 'Alice' , and rerun the program. Instead of 'Hi, Alice.' , you will see 'Hello, stranger.' on the screen."
+    },
+    {
+      "id": "if:085",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "elif"
+    },
+    {
+      "id": "if:086",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "You would use if or else when you want only one of the clauses to execute. But you may have a case where you want one of many possible clauses to execute. The elif statement is an “else if” statement that always follows an if or another elif statement. It provides another condition that is checked only if all of the previous conditions were False . In code, an elif statement always consists of the following:"
+    },
+    {
+      "id": "if:087",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "A condition (that is, an expression that evaluates to True or False )"
+    },
+    {
+      "id": "if:088",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Starting on the next line, an indented block of code (called the elif clause or elif block)"
+    },
+    {
+      "id": "if:089",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "name = 'Alice'\nage = 33\nif name == 'Alice':\n    print('Hi, Alice.')\nelif age < 12:\n    print('You are not Alice, kiddo.')"
+    },
+    {
+      "id": "if:090",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "This time, the program checks the person’s age and tells them something different if they’re younger than 12. You can see the corresponding flowchart in Figure 2-4."
+    },
+    {
+      "id": "if:091",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "The elif clause executes if age < 12 is True and name == 'Alice' is False . However, if both of the conditions are False , Python skips both of the clauses. There is no guarantee that at least one of the clauses will be executed; in a chain of elif statements, only one or none of the clauses will be executed. Once one of the statements’ conditions is found to be True , the rest of the elif clauses are automatically skipped. For example, open a new file editor window and enter the following code, saving it as vampire.py :"
+    },
+    {
+      "id": "if:092",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "open a new file editor window and enter the following code, saving it as vampire.py :"
+    },
+    {
+      "id": "if:093",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "name = 'Carol'\nage = 3000\nif name == 'Alice':\n    print('Hi, Alice.')\nelif age < 12:\n    print('You are not Alice, kiddo.')\nelif age > 2000:\n    print('Unlike you, Alice is not an undead, immortal vampire.')\nelif age > 100:\n    print('You are not Alice, grannie.')"
+    },
+    {
+      "id": "if:094",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Here, I’ve added two more elif statements to make the name checker greet a person with different answers based on age . Figure 2-5 shows the flowchart for this."
+    },
+    {
+      "id": "if:095",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "The order of the elif statements does matter, however. Let’s rearrange them to introduce a bug. Remember that the rest of the elif clauses are automatically skipped once a True condition has been found, so if you swap around some of the clauses in vampire.py , you will run into a problem. Change the code to look like the following, and save it as vampire2.py :"
+    },
+    {
+      "id": "if:096",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "name = 'Carol'\nage = 3000\nif name == 'Alice':\n    print('Hi, Alice.')\nelif age < 12:\n    print('You are not Alice, kiddo.')\n\n❶\n elif age > 100:\n    print('You are not Alice, grannie.')\nelif age > 2000:\n    print('Unlike you, Alice is not an undead, immortal vampire.')"
+    },
+    {
+      "id": "if:097",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Say the age variable contains the value 3000 before this code is executed. You might expect the code to print the string 'Unlike you, Alice is not an undead, immortal vampire.' However, because the age > 100 condition is True (after all, 3,000 is greater than 100) ❶ , the string 'You are not Alice, grannie.' is printed, and the rest of the elif statements are automatically skipped. Remember that at most only one of the clauses will be executed, and for elif statements, the order matters!"
+    },
+    {
+      "id": "if:098",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "order matters!"
+    },
+    {
+      "id": "if:099",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Figure 2-6 shows the flowchart for the previous code. Notice how the diamonds for age > 100 and age > 2000 are swapped."
+    },
+    {
+      "id": "if:100",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Figure 2-6: The vampire2.py program flowchart. The X path will logically never happen, because if age were greater than 2000 , it would have already been greater than 100. Description"
+    },
+    {
+      "id": "if:101",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Optionally, you can have an else statement after the last elif statement. In that case, it is guaranteed that at least one (and only one) of the clauses will be executed. If the conditions in every if and elif statement are False , then the else clause is executed. For example, let’s re-create the Alice program to use if , elif , and else clauses:"
+    },
+    {
+      "id": "if:102",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "name = 'Carol'\nage = 3000\nif name == 'Alice':\n    print('Hi, Alice.')\nelif age < 12:\n    print('You are not Alice, kiddo.')\nelse:\n    print('You are neither Alice nor a little kid.')"
+    },
+    {
+      "id": "if:103",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Figure 2-7 shows the flowchart for this new code, which we’ll save as littleKid.py ."
+    },
+    {
+      "id": "if:104",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "In plain English, this type of flow control structure would be, “If the first condition is true, do this. Else, if the second condition is true, do that. Otherwise, do something else.” When you use if , elif , and else statements together, remember these rules about how to order them to avoid bugs like the one in Figure 2-6. First, there is always exactly one if statement; any elif statements you need should follow the if statement. Second, if you want to be sure that at least one clause is executed, close the structure with an else statement."
+    },
+    {
+      "id": "if:105",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "that at least one clause is executed, close the structure with an else statement."
+    },
+    {
+      "id": "if:106",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "As you can see, flow control statements can make your programs more sophisticated but also more complicated. Don’t despair; you will become more comfortable with this complexity as you practice writing code. And all true programmers have at some point spent an hour to find out their program doesn’t work because they accidentally typed < instead of <= . These little mistakes happen to everyone."
+    },
+    {
+      "id": "if:107",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "A Short Program: Opposite Day"
+    },
+    {
+      "id": "if:108",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "With your knowledge of Boolean values and if - else statements, enter the following code into a new file and save it as oppositeday.py :"
+    },
+    {
+      "id": "if:109",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "today_is_opposite_day = True\n\n# Set say_it_is_opposite_day based on today_is_opposite_day:\n\n❶\n if today_is_opposite_day == True:\n    say_it_is_opposite_day = True\nelse:\n    say_it_is_opposite_day = False\n\n# If it is opposite day, toggle say_it_is_opposite_day:\nif today_is_opposite_day == True:\n  \n❷\n say_it_is_opposite_day = not say_it_is_opposite_day\n\n# Say what day it is:\nif say_it_is_opposite_day == True:\n    print('Today is Opposite Day.')\nelse:\n    print('Today is not Opposite Day.')"
+    },
+    {
+      "id": "if:110",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "When you run this program, it outputs 'Today is not Opposite Day.' There are two variables in this code. At the start of the program, the today_is_opposite_day variable is set to True . The next if statement checks if this variable is True (it is) ❶ and sets the say_it_is_opposite_day variable to True ; otherwise, it would set the variable to False . The second if statement checks if today_is_opposite_day is set to True (it still is), and if so, the code toggles (that is, sets to the opposite Boolean value) the variable ❷ . Finally, the third if statement checks if say_it_is_opposite_day is True (it isn’t) and prints 'Today"
+    },
+    {
+      "id": "if:111",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "sets to the opposite Boolean value) the variable ❷ . Finally, the third if statement checks if say_it_is_opposite_day is True (it isn’t) and prints 'Today is Opposite Day.' ; otherwise, it would have printed 'Today is not Opposite Day.'"
+    },
+    {
+      "id": "if:112",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "If you change the first line of the program to today_is_opposite_day = False and run the program again, it still prints 'Today is not Opposite Day.' If we look through the program, we can figure out that the first if - else statements set say_it_is_opposite_day to False . The second if statement’s condition is False , so it skips its block of code. Finally, the third if statement’s condition is again False and prints 'Today is not Opposite Day.'"
+    },
+    {
+      "id": "if:113",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "So, if today is not Opposite Day, the program correctly prints 'Today is not Opposite Day.' And if today is Opposite Day, the program (also correctly) prints 'Today is not Opposite Day.' as one would say on Opposite Day. Logically, this program will never print 'Today is Opposite Day.' no matter if the variable is set to True or False . Really, you could replace this entire program with just print('Today is not Opposite Day.') and it would be the same program. This is why programmers should not be paid per line of code written."
+    },
+    {
+      "id": "if:114",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "programmers should not be paid per line of code written."
+    },
+    {
+      "id": "if:115",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "A Short Program: Dishonest Capacity Calculator"
+    },
+    {
+      "id": "if:116",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "In Chapter 1 , I showed how hard drive and flash memory manufacturers lie about the advertised capacities of their products by using a different definition of TB and GB. Let’s write a program to calculate how misleading their advertised capacities are. Enter the following code into a new file and save it as dishonestcapacity.py :"
+    },
+    {
+      "id": "if:117",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "print('Enter TB or GB for the advertised unit:')\nunit = input('>')\n\n# Calculate the amount that the advertised capacity lies:\nif unit == 'TB' or unit == 'tb':\n    discrepancy = 1000000000000 / 1099511627776\nelif unit == 'GB' or unit == 'gb':\n    discrepancy = 1000000000 / 1073741824\n\nprint('Enter the advertised capacity:')\nadvertised_capacity = input('>')\nadvertised_capacity = float(advertised_capacity)\n\n# Calculate the real capacity, round it to the nearest hundredths,\n# and convert it to a string so it can be concatenated:\nreal_capacity = str(round(advertised_capacity * discrepancy, 2))\n\nprint('The actual capacity is ' + real_capacity + ' ' + unit)"
+    },
+    {
+      "id": "if:118",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "This program asks the user to enter what unit the hard drive advertises itself as having, either TB or GB:"
+    },
+    {
+      "id": "if:119",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "# Calculate the amount that the advertised capacity lies:\nif unit == 'TB' or unit == 'tb':\n    discrepancy = 1000000000000 / 1099511627776\nelif unit == 'GB' or unit == 'gb':\n    discrepancy = 1000000000 / 1073741824"
+    },
+    {
+      "id": "if:120",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "TBs are larger than GBs, and the larger the unit, the wider the discrepancy between advertised and real capacities. The if and elif statements use a Boolean or operator so that the program works no matter whether the user enters the unit in lowercase or uppercase. If the user enters something else for the unit, then neither the if clause nor the elif clause runs, and the discrepancy variable is never assigned. Later, when the program tries to use the discrepancy variable, this will cause an error. We’ll cover that case later."
+    },
+    {
+      "id": "if:121",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "an error. We’ll cover that case later."
+    },
+    {
+      "id": "if:122",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "# Calculate the real capacity, round it to the nearest hundredths,\n# and convert it to a string so it can be concatenated:\nreal_capacity = str(round(advertised_capacity * discrepancy, 2))"
+    },
+    {
+      "id": "if:123",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "We do a lot in this single line. Let’s use the example of the user entering 10TB for the advertised size and unit. If we look at the innermost part of the line of code, we see that advertised_capacity is multiplied by discrepancy . This is the real capacity, but it may have several digits, as in 9.094947017729282 . So this number is passed as the first argument to round() with 2 as the second argument. This function call to round() returns, in our example, 9.09 . This is a floating-point value, but we want to get a string form of it to concatenate to a message string in the"
+    },
+    {
+      "id": "if:124",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "9.09 . This is a floating-point value, but we want to get a string form of it to concatenate to a message string in the next line of code. To do this, we pass it to the str() function. Python evaluates this one line as the following:"
+    },
+    {
+      "id": "if:125",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "If the user failed to enter TB , tb , GB , or gb as the unit, the conditions for both the if and elif statements would be False and the discrepancy variable would never be created. But the user wouldn’t know anything was wrong until Python tried to use the nonexistent variable. Python would raise a NameError: name 'discrepancy' is not defined error and point to the line where real_capacity is assigned."
+    },
+    {
+      "id": "if:126",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "The true origin of this bug, however, is the fact that the program doesn’t handle the case where the user enters an invalid unit. There are many ways to handle this error, but the simplest would be to have an else clause that displays a message like “You must enter TB or GB” and then calls the sys.exit() function to quit the program. (You’ll learn about this function in the next chapter.)"
+    },
+    {
+      "id": "if:127",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "The final line in the program displays the actual hard drive capacity by concatenating a message string to the real_capacity and unit strings:"
+    },
+    {
+      "id": "if:128",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "print('The actual capacity is ' + real_capacity + ' ' + unit)"
+    },
+    {
+      "id": "if:129",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "As it turns out, hard drives and flash memory manufacturers lie even more: I have a 256GB SD card in my laptop that I use for backups. In real GBs, this should be 274,877,906,944 bytes. In fake GBs, it should be 256,000,000,000 bytes. But my computer reports that the actual capacity is 255,802,212,352 bytes. It’s funny how the actual size is always inaccurate in a way that makes it less than the advertised size, and never more."
+    },
+    {
+      "id": "if:130",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Summary"
+    },
+    {
+      "id": "if:131",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "By using expressions that evaluate to True or False (also called conditions), you can write programs that make decisions on what code to execute and what code to skip. These conditions are expressions that compare two values with the == , != , < , > , <= , and >= comparison operators to evaluate to a Boolean value. You can also use the and , or , and not Boolean operators to connect expressions into more complicated expressions. Python uses indentation to create blocks of code. In this chapter, we used blocks as part of if , elif , and else statements, but as you’ll see, several other Python"
+    },
+    {
+      "id": "if:132",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "of code. In this chapter, we used blocks as part of if , elif , and else statements, but as you’ll see, several other Python statements use blocks as well. These flow control statements will let you write more intelligent programs."
+    },
+    {
+      "id": "if:133",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "Practice Questions"
+    },
+    {
+      "id": "if:134",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "1. What are the two values of the Boolean data type? How do you write them?"
+    },
+    {
+      "id": "if:135",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "3. Write out the truth tables of each Boolean operator (that is, every possible combination of Boolean values for the operator and what they evaluate to)."
+    },
+    {
+      "id": "if:136",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "(5 > 4) and (3 == 5)\n\nnot (5 > 4)\n(5 > 4) or (3 == 5)\nnot ((5 > 4) or (3 == 5))\n(True and True) and (True == False)\n(not False) or (not True)"
+    },
+    {
+      "id": "if:137",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "spam = 0\n\nif spam == 10:\n    print('eggs')\n    if spam > 5:\n       print('bacon')\n\n    else:\n        print('ham')\n    print('spam')\nprint('Done')"
+    },
+    {
+      "id": "if:138",
+      "source": "https://automatetheboringstuff.com/3e/chapter2.html",
+      "text": "9. Write code that prints Hello if 1 is stored in spam , prints Howdy if 2 is stored in spam , and prints Greetings! if anything else is stored in spam ."
+    }
+  ]
+}
